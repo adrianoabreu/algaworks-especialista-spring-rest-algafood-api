@@ -7,21 +7,20 @@ import org.springframework.stereotype.Component;
 
 import com.algaworks.algafood.di.modelo.Cliente;
 
-@Profile("prod")
+@Profile("dev")
 @TipoDoNotificador(NivelUrgencia.NORMAL) // Anotação Customizada que se comporta como @Qualifier
 //@Qualifier("normal") // Anotação usada para fazer desambiguação de beans.
 //@Primary  // Anotação usada para fazer desambiguação de beans. Determina qual bean é prioritário
 @Component // Esta anotação significa que a classe é um Bean
-public class NotificadorEmail implements Notificador {
-		
-	public NotificadorEmail() {
-		System.out.println("NotificadorEmail REAL");
+public class NotificadorEmailMock implements Notificador {
+	
+	public NotificadorEmailMock() {
+		System.out.println("NotificadorEmail MOCK");
 	}
-
+	
 	@Override
 	public void notificar(Cliente cliente, String mensagem) {
-		
-		System.out.printf("Notificando %s através do email %s: %s\n", 
+		System.out.printf("MOCK: Notificação seria enviada para %s através do email %s: %s\n", 
 				cliente.getNome(), cliente.getEmail(), mensagem);
 	}
 	
