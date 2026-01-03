@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import com.algaworks.algafood.di.modelo.Cliente;
@@ -37,12 +38,18 @@ public class AtivacaoClienteService {
 //		
 //	}
 	
+	@Autowired
+	private ApplicationEventPublisher eventPublisher;
+	
 	public void ativar(Cliente cliente) {
 		cliente.ativar();
 		
 //		for(Notificador notificador : notificadores) {
-			notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");
+//			notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");
 //		}
+
+//		dizer para o container que o cliente está ativo neste momento
+		eventPublisher.publishEvent(new ClienteAtivadoEvent(cliente));
 	}
 
 //	@Autowired //ponto de injeção de dependência via metodo set

@@ -37,12 +37,12 @@ public class Cliente {
 		this.telefone = telefone;
 	}
 
-	public boolean ativar() {
+	public boolean isAtivo() {
 		return ativo;
 	}
 
-	public void ativar(boolean ativo) {
-		this.ativo = ativo;
+	public void ativar() {
+		this.ativo = true;
 	}
 	
 	
