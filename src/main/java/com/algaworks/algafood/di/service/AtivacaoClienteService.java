@@ -11,6 +11,9 @@ import com.algaworks.algafood.di.notificacao.NivelUrgencia;
 import com.algaworks.algafood.di.notificacao.Notificador;
 import com.algaworks.algafood.di.notificacao.TipoDoNotificador;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+
 @Component // Esta anotação significa que a classe é um Bean
 public class AtivacaoClienteService {
 
@@ -33,14 +36,13 @@ public class AtivacaoClienteService {
 //	public AtivacaoClienteService(String qualquer) {
 //		
 //	}
-
+	
 	public void ativar(Cliente cliente) {
 		cliente.ativar();
 		
 //		for(Notificador notificador : notificadores) {
 			notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");
 //		}
-
 	}
 
 //	@Autowired //ponto de injeção de dependência via metodo set
@@ -48,5 +50,14 @@ public class AtivacaoClienteService {
 //		this.notificador = notificador;
 //	}
 	
+//	@PostConstruct
+	public void init() {
+		System.out.println("INIT " + notificador);
+	}
+	
+//	@PreDestroy
+	public void destroy() {
+		System.out.println("DESTROY");
+	}
 	
 }
