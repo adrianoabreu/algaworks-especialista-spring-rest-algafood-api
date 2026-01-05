@@ -22,8 +22,9 @@ public class CadastroCozinha {
 		return manager.find(Cozinha.class, id);
 	}
 	
+	//este metodo servirá tanto para inserir quanto para atualizar
 	@Transactional
-	public Cozinha adicionar(Cozinha cozinha) {
+	public Cozinha salvar(Cozinha cozinha) {
 		return manager.merge(cozinha);
 	}
 }
