@@ -17,6 +17,7 @@ import lombok.EqualsAndHashCode;
 //@Getter
 //@Setter
 //@JsonRootName("gastronomia") // altera o nome da classe Cozinha para gastronomia no XML.
+@JsonRootName("cozinha") // altera o nome da classe Cozinha para cozinha no XML.
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
@@ -28,7 +29,7 @@ public class Cozinha {
 	private Long id;
 	
 	//@JsonIgnore // remove o atributo na exibição do JSON e XML
-	@JsonProperty("titulo") // altera o atributo nome no JSON e XML para titulo
+//	@JsonProperty("titulo") // altera o atributo nome no JSON e XML para titulo
 	@Column(nullable = false)
 	private String nome;
 	
