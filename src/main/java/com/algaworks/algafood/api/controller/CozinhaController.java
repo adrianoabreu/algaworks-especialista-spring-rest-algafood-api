@@ -38,17 +38,20 @@ public class CozinhaController {
 	
 //	@ResponseStatus(HttpStatus.OK) // alterando codigo status response http. 
 	@GetMapping("/{cozinhaId}")
-	public ResponseEntity<Cozinha> buscar(@PathVariable Long cozinhaId) {
+	public ResponseEntity<Cozinha> buscar(@PathVariable Long cozinhaId) {	
 		Cozinha cozinha = cozinhaRepository.porId(cozinhaId);
 		
 		//ResponseEntity permite customizar a resposta HTTP com status e corpo(payload) do retorno da requisição.
-//		return ResponseEntity.status(HttpStatus.OK).body(cozinha);
-//		return ResponseEntity.ok(cozinha);
-	
-		HttpHeaders headers = new HttpHeaders();
-		headers.add(HttpHeaders.LOCATION, "http://localhost:8080/cozinhas"); // response status 302
-		
-		return ResponseEntity.status(HttpStatus.FOUND).headers(headers).build();
+
+		if(cozinha != null) {
+//			return ResponseEntity.status(HttpStatus.OK).body(cozinha);
+			return ResponseEntity.ok(cozinha);			
+		}
+
+		return ResponseEntity.notFound().build();			
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.add(HttpHeaders.LOCATION, "http://localhost:8080/cozinhas"); // response status 302
+//		return ResponseEntity.status(HttpStatus.FOUND).headers(headers).build();
 	}
 	
 
