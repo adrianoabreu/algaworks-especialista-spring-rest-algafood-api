@@ -65,22 +65,27 @@ public class RestauranteController {
 			restaurante = cadastroRestaurante.salvar(restaurante);			
 			return ResponseEntity.status(HttpStatus.CREATED).body(restaurante);
 		} catch (EntidadeNaoEncontradaException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
+			return ResponseEntity.badRequest().body(e.getMessage()); // Codigo response status HTTP 400.
 		}
 	}
 	
 	@PutMapping("/{restauranteId}")
-	public ResponseEntity<Restaurante> atualizar(@PathVariable Long restauranteId, @RequestBody Restaurante restaurante) {
-		Restaurante restauranteAtual = restauranteRepository.porId(restauranteId);
+	public ResponseEntity<?> atualizar(@PathVariable Long restauranteId, @RequestBody Restaurante restaurante) {
+		try {
+			Restaurante restauranteAtual = restauranteRepository.porId(restauranteId);
 		
-		if(restauranteAtual != null) {
-//		   cozinhaAtual.setNome(cozinha.getNome());
-		   BeanUtils.copyProperties(restaurante, restauranteAtual, "id"); // copia os dados dos atributos de cozinha para cozinhaAtual
+			if(restauranteAtual != null) {
+//		   		cozinhaAtual.setNome(cozinha.getNome());
+				BeanUtils.copyProperties(restaurante, restauranteAtual, "id"); // copia os dados dos atributos de cozinha para cozinhaAtual
 		
-		   restauranteAtual = cadastroRestaurante.salvar(restauranteAtual);
-		   return ResponseEntity.ok(restauranteAtual);
+				restauranteAtual = cadastroRestaurante.salvar(restauranteAtual);
+				return ResponseEntity.ok(restauranteAtual);
+			}
+			return ResponseEntity.notFound().build();
+		} catch (EntidadeNaoEncontradaException e) {
+			return ResponseEntity.badRequest().body(e.getMessage()); // Codigo response status HTTP 400.
 		}
-		return ResponseEntity.notFound().build();
+		
 	}
 
 	@DeleteMapping("/{cozinhaId}")
