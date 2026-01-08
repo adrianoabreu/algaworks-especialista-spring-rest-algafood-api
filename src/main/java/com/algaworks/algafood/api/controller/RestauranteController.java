@@ -23,36 +23,35 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
-import com.algaworks.algafood.domain.model.Cozinha;
-import com.algaworks.algafood.domain.repository.CozinhaRepository;
-import com.algaworks.algafood.domain.service.CadastroCozinhaService;
+import com.algaworks.algafood.domain.model.Restaurante;
+import com.algaworks.algafood.domain.repository.RestauranteRepository;
+import com.algaworks.algafood.domain.service.CadastroRestauranteService;
 
 @RestController
-//@RequestMapping(value = "/cozinhas", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-@RequestMapping("/cozinhas")
-public class CozinhaController {
+@RequestMapping("/restaurantes")
+public class RestauranteController {
 
 	@Autowired
-	private CozinhaRepository cozinhaRepository;
+	private RestauranteRepository restauranteRepository;
 	
 	@Autowired
-	private CadastroCozinhaService cadastroCozinha;
+	private CadastroRestauranteService cadastroRestaurante;
 	
 	@GetMapping//(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Cozinha> listar() {
-		return cozinhaRepository.todas();
+	public List<Restaurante> listar() {
+		return restauranteRepository.todos();
 	}
 	
 //	@ResponseStatus(HttpStatus.OK) // alterando codigo status response http. 
-	@GetMapping("/{cozinhaId}")
-	public ResponseEntity<Cozinha> buscar(@PathVariable Long cozinhaId) {	
-		Cozinha cozinha = cozinhaRepository.porId(cozinhaId);
+	@GetMapping("/{restauranteId}")
+	public ResponseEntity<Restaurante> buscar(@PathVariable Long restauranteId) {	
+		Restaurante restaurante = restauranteRepository.porId(restauranteId);
 		
 		//ResponseEntity permite customizar a resposta HTTP com status e corpo(payload) do retorno da requisição.
 
-		if(cozinha != null) {
-//			return ResponseEntity.status(HttpStatus.OK).body(cozinha);
-			return ResponseEntity.ok(cozinha);			
+		if(restaurante != null) {
+//			return ResponseEntity.status(HttpStatus.OK).body(restaurante);
+			return ResponseEntity.ok(restaurante);			
 		}
 
 		return ResponseEntity.notFound().build();			
@@ -63,28 +62,28 @@ public class CozinhaController {
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cozinha adicionar(@RequestBody Cozinha cozinha) {
-		return cadastroCozinha.salvar(cozinha);
+	public Restaurante adicionar(@RequestBody Restaurante restaurante) {
+		return cadastroRestaurante.salvar(restaurante);
 	}
 	
-	@PutMapping("/{cozinhaId}")
-	public ResponseEntity<Cozinha> atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha) {
-		Cozinha cozinhaAtual = cozinhaRepository.porId(cozinhaId);
+	@PutMapping("/{restauranteId}")
+	public ResponseEntity<Restaurante> atualizar(@PathVariable Long restauranteId, @RequestBody Restaurante restaurante) {
+		Restaurante restauranteAtual = restauranteRepository.porId(restauranteId);
 		
-		if(cozinhaAtual != null) {
+		if(restauranteAtual != null) {
 //		   cozinhaAtual.setNome(cozinha.getNome());
-		   BeanUtils.copyProperties(cozinha, cozinhaAtual, "id"); // copia os dados dos atributos de cozinha para cozinhaAtual
+		   BeanUtils.copyProperties(restaurante, restauranteAtual, "id"); // copia os dados dos atributos de cozinha para cozinhaAtual
 		
-	       cozinhaAtual = cadastroCozinha.salvar(cozinhaAtual);
-		   return ResponseEntity.ok(cozinhaAtual);
+		   restauranteAtual = cadastroRestaurante.salvar(restauranteAtual);
+		   return ResponseEntity.ok(restauranteAtual);
 		}
 		return ResponseEntity.notFound().build();
 	}
 
 	@DeleteMapping("/{cozinhaId}")
-	public ResponseEntity<Cozinha> remover(@PathVariable Long cozinhaId) {
+	public ResponseEntity<Restaurante> remover(@PathVariable Long restauranteId) {
 		try {
-			cadastroCozinha.excluir(cozinhaId);
+			cadastroRestaurante.excluir(restauranteId);
 			return ResponseEntity.noContent().build();
 		
 		} catch (EntidadeNaoEncontradaException e) {
