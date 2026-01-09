@@ -7,30 +7,30 @@ import org.springframework.stereotype.Service;
 
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
-import com.algaworks.algafood.domain.model.Estado;
-import com.algaworks.algafood.domain.repository.EstadoRepository;
+import com.algaworks.algafood.domain.model.FormaPagamento;
+import com.algaworks.algafood.domain.repository.FormaPagamentoRepository;
 
 @Service
-public class CadastroEstadoService {
-
-	@Autowired
-	private EstadoRepository estadoRepository;
+public class CadastroFormaPagamentoService {
 	
-	public Estado salvar(Estado estado) {
-		return estadoRepository.save(estado);
+	@Autowired
+	private FormaPagamentoRepository formaPagamentoRepository;
+	
+	public FormaPagamento salvar(FormaPagamento formaPagamento) {
+		return formaPagamentoRepository.save(formaPagamento);
 	}
 	
-	public void excluir(Long estadoId) {
+	public void excluir(Long formaPagamentoId) {
 		try {
-			estadoRepository.deleteById(estadoId);
+			formaPagamentoRepository.deleteById(formaPagamentoId);
 		
 		} catch (EmptyResultDataAccessException e) {
 			throw new EntidadeNaoEncontradaException(
-					String.format("Não existe um cadastro com código %d", estadoId));
+					String.format("Não existe um cadastro com código %d", formaPagamentoId));
 			
 		} catch (DataIntegrityViolationException e) {
 			throw new EntidadeEmUsoException(
-					String.format("Estado de código %d não pode ser removido, pois está em uso", estadoId));
+					String.format("Cozinha de código %d não pode ser removida, pois está em uso", formaPagamentoId));
 		}
 	}
 }

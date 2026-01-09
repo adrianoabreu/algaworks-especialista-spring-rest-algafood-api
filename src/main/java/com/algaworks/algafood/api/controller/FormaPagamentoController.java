@@ -19,39 +19,40 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 //import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
-import com.algaworks.algafood.domain.model.Cidade;
-import com.algaworks.algafood.domain.repository.CidadeRepository;
-import com.algaworks.algafood.domain.service.CadastroCidadeService;
+import com.algaworks.algafood.domain.model.FormaPagamento;
+import com.algaworks.algafood.domain.repository.FormaPagamentoRepository;
+import com.algaworks.algafood.domain.service.CadastroFormaPagamentoService;
 
 @RestController
-@RequestMapping("/cidades")
-public class CidadeController {
-
-	@Autowired
-	private CidadeRepository cidadeRepository;
+@RequestMapping("/pagamentos")
+public class FormaPagamentoController {
+	
+	@Autowired 
+	private FormaPagamentoRepository formaPagamentoRepository;
 	
 	@Autowired
-	private CadastroCidadeService cadastroCidade;
+	private CadastroFormaPagamentoService cadastroFormaPagamento;
 	
-	@GetMapping
-	public List<Cidade> listar() {
-		return cidadeRepository.findAll();
+	@GetMapping//(produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<FormaPagamento> listar() {
+		return formaPagamentoRepository.findAll();
 	}
 	
 //	@ResponseStatus(HttpStatus.OK) // alterando codigo status response http. 
-	@GetMapping("/{cidadeId}")
-	public ResponseEntity<Cidade> buscar(@PathVariable Long cidadeId) {	
-		Optional<Cidade> cidade = cidadeRepository.findById(cidadeId);
+	@GetMapping("/{formaPagamentoId}")
+	public ResponseEntity<FormaPagamento> buscar(@PathVariable Long formaPagamentoId) {	
+		Optional<FormaPagamento> formaPagamento = formaPagamentoRepository.findById(formaPagamentoId);
 		
 		//ResponseEntity permite customizar a resposta HTTP com status e corpo(payload) do retorno da requisição.
 
-		if(cidade.isPresent()) {
-//			return ResponseEntity.status(HttpStatus.OK).body(restaurante);
-			return ResponseEntity.ok(cidade.get());			
+		if(formaPagamento.isPresent()) {
+//			return ResponseEntity.status(HttpStatus.OK).body(cozinha);
+			return ResponseEntity.ok(formaPagamento.get());			
 		}
 
 		return ResponseEntity.notFound().build();			
@@ -61,38 +62,29 @@ public class CidadeController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> adicionar(@RequestBody Cidade cidade) {
-		try {
-			cidade = cadastroCidade.salvar(cidade);			
-			return ResponseEntity.status(HttpStatus.CREATED).body(cidade);
-		} catch (EntidadeNaoEncontradaException e) {
-			return ResponseEntity.badRequest().body(e.getMessage()); // Codigo response status HTTP 400.
-		}
+	@ResponseStatus(HttpStatus.CREATED)
+	public FormaPagamento adicionar(@RequestBody FormaPagamento formaPagamento) {
+		return cadastroFormaPagamento.salvar(formaPagamento);
 	}
 	
-	@PutMapping("/{cidadeId}")
-	public ResponseEntity<?> atualizar(@PathVariable Long cidadeId, @RequestBody Cidade cidade) {
-		try {
-			Optional<Cidade> cidadeAtual = cidadeRepository.findById(cidadeId);
+	@PutMapping("/{formaPagamentoId}")
+	public ResponseEntity<FormaPagamento> atualizar(@PathVariable Long formaPagamentoId, @RequestBody FormaPagamento formaPagamento) {
+		Optional<FormaPagamento> formaPagamentoAtual = formaPagamentoRepository.findById(formaPagamentoId);
 		
-			if(cidadeAtual != null) {
-//		   		cozinhaAtual.setNome(cozinha.getNome());
-				BeanUtils.copyProperties(cidade, cidadeAtual, "id"); // copia os dados dos atributos de cozinha para cozinhaAtual
+		if(formaPagamentoAtual != null) {
+//		   cozinhaAtual.setNome(cozinha.getNome());
+		   BeanUtils.copyProperties(formaPagamento, formaPagamentoAtual.get(), "id"); // copia os dados dos atributos de cozinha para cozinhaAtual
 		
-				Cidade cidadeSalva = cadastroCidade.salvar(cidadeAtual.get());
-				return ResponseEntity.ok(cidadeSalva);
-			}
-			return ResponseEntity.notFound().build();
-		} catch (EntidadeNaoEncontradaException e) {
-			return ResponseEntity.badRequest().body(e.getMessage()); // Codigo response status HTTP 400.
+		   FormaPagamento formaPagamentoSalva = cadastroFormaPagamento.salvar(formaPagamentoAtual.get());
+		   return ResponseEntity.ok(formaPagamentoSalva);
 		}
-		
+		return ResponseEntity.notFound().build();
 	}
 
-	@DeleteMapping("/{cidadeId}")
-	public ResponseEntity<Cidade> remover(@PathVariable Long cidadeId) {
+	@DeleteMapping("/{formaPagamentoId}")
+	public ResponseEntity<FormaPagamento> remover(@PathVariable Long formaPagamentoId) {
 		try {
-			cadastroCidade.excluir(cidadeId);
+			cadastroFormaPagamento.excluir(formaPagamentoId);
 			return ResponseEntity.noContent().build();
 		
 		} catch (EntidadeNaoEncontradaException e) {
