@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+//import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.algaworks.algafood.domain.model.Restaurante;
 
 @Repository
-public interface RestauranteRepository extends JpaRepository<Restaurante, Long> {
+public interface RestauranteRepository extends JpaRepository<Restaurante, Long>, RestauranteRepositoryQueries {
 	
 	//Retorna uma faixa de taxa frete informado
 	List<Restaurante> findByTaxaFreteBetween(BigDecimal taxaInicial, BigDecimal taxaFinal);
@@ -30,5 +30,5 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long> 
 	
 	//Recupera quantidade de restaurantes da Cozinha Informada
 	int countByCozinhaId(Long cozinha);
-	
+		
 }
