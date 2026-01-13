@@ -15,6 +15,8 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 
 //Esta classe precisa ter o sufixo Impl para o Spring Data JPA entender que existe implementação de metodos da interface RestauranteRepository.
 @Repository
@@ -30,7 +32,15 @@ public class RestauranteRepositoryImpl implements RestauranteRepositoryQueries {
 		CriteriaBuilder builder = manager.getCriteriaBuilder();
 		
 		CriteriaQuery<Restaurante> criteria = builder.createQuery(Restaurante.class);
-		criteria.from(Restaurante.class); // from Restaurante
+		Root<Restaurante> root = criteria.from(Restaurante.class); // from Restaurante
+		
+		Predicate nomePredicate = builder.like(root.get("nome"), "%" + nome + "%");
+		
+		Predicate taxaInicialPredicate = builder.greaterThanOrEqualTo(root.get("taxaFrete"), taxaFreteInicial);
+		
+		Predicate taxaFinalPredicate = builder.lessThanOrEqualTo(root.get("taxaFrete"), taxaFreteFinal);
+
+		criteria.where(nomePredicate, taxaInicialPredicate, taxaFinalPredicate);
 		
 		TypedQuery<Restaurante> query = manager.createQuery(criteria);		
 		return query.getResultList();
