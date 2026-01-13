@@ -28,3 +28,5 @@ INSERT INTO forma_pagamento (descricao) VALUES ('Pix');
 INSERT INTO permissao (nome, descricao) VALUES ('Permissao ABC','Descricao da permissao ABC');
 INSERT INTO permissao (nome, descricao) VALUES ('Permissao ABC','Descricao da permissao ABC');
 INSERT INTO permissao (nome, descricao) VALUES ('Permissao ABC','Descricao da permissao ABC');
+
+INSERT INTO restaurante_forma_pagamento (restaurante_id, forma_pagamento_id) VALUES (1,1), (1,2), (1,3), (2,3), (3,2), (3,3);
