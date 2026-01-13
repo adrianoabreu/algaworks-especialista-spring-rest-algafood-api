@@ -1,10 +1,6 @@
 INSERT INTO cozinha (nome) VALUES ('Tailandesa');
 INSERT INTO cozinha (nome) VALUES ('Indiana');
 
-INSERT INTO restaurante (nome, taxa_frete, cozinha_id) VALUES ('Casa Velha', 0.7, 1);
-INSERT INTO restaurante (nome, taxa_frete, cozinha_id) VALUES ('Outback', 1.2, 2);
-INSERT INTO restaurante (nome, taxa_frete, cozinha_id) VALUES ('O Camarão', 4.5, 1);
-
 INSERT INTO estado (nome) VALUES ('Estado ABC');
 INSERT INTO estado (nome) VALUES ('Estado DEF');
 INSERT INTO estado (nome) VALUES ('Estado GHI');
@@ -20,6 +16,10 @@ INSERT INTO cidade (nome, estado_id) VALUES ('Cidade PQR', 3);
 INSERT INTO cidade (nome, estado_id) VALUES ('Cidade STU', 4);
 INSERT INTO cidade (nome, estado_id) VALUES ('Cidade VXW', 4);
 INSERT INTO cidade (nome, estado_id) VALUES ('Cidade YZA', 5);
+
+INSERT INTO restaurante (nome, taxa_frete, cozinha_id, endereco_cidade_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro) VALUES ('Casa Velha', 0.7, 1, 1, '21050-740', 'Rua Eudoro Berlinck', '10', '214', 'Higienopolis');
+INSERT INTO restaurante (nome, taxa_frete, cozinha_id) VALUES ('Outback', 1.2, 2);
+INSERT INTO restaurante (nome, taxa_frete, cozinha_id) VALUES ('O Camarão', 4.5, 1);
 
 INSERT INTO forma_pagamento (descricao) VALUES ('Debito em conta');
 INSERT INTO forma_pagamento (descricao) VALUES ('Cartao de credito');
