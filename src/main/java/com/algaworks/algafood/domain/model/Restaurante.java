@@ -7,6 +7,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,6 +38,9 @@ public class Restaurante {
 	@ManyToOne
 	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
+	
+	@Embedded
+	private Endereco endereco; //A classe endereço é parte da classe Restaurante.
 	
 	@JsonIgnore
 	@ManyToMany
