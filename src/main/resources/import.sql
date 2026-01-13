@@ -17,9 +17,9 @@ INSERT INTO cidade (nome, estado_id) VALUES ('Cidade STU', 4);
 INSERT INTO cidade (nome, estado_id) VALUES ('Cidade VXW', 4);
 INSERT INTO cidade (nome, estado_id) VALUES ('Cidade YZA', 5);
 
-INSERT INTO restaurante (nome, taxa_frete, cozinha_id, endereco_cidade_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro) VALUES ('Casa Velha', 0.7, 1, 1, '21050-740', 'Rua Eudoro Berlinck', '10', '214', 'Higienopolis');
-INSERT INTO restaurante (nome, taxa_frete, cozinha_id) VALUES ('Outback', 1.2, 2);
-INSERT INTO restaurante (nome, taxa_frete, cozinha_id) VALUES ('O Camarão', 4.5, 1);
+INSERT INTO restaurante (nome, taxa_frete, cozinha_id, endereco_cidade_id, endereco_cep, endereco_logradouro, endereco_numero, endereco_complemento, endereco_bairro, data_cadastro, data_atualizacao) VALUES ('Casa Velha', 0.7, 1, 1, '21050-740', 'Rua Eudoro Berlinck', '10', '214', 'Higienopolis', utc_timestamp, utc_timestamp);
+INSERT INTO restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao) VALUES ('Outback', 1.2, 2, utc_timestamp, utc_timestamp);
+INSERT INTO restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao) VALUES ('O Camarão', 4.5, 1, utc_timestamp, utc_timestamp);
 
 INSERT INTO forma_pagamento (descricao) VALUES ('Debito em conta');
 INSERT INTO forma_pagamento (descricao) VALUES ('Cartao de credito');

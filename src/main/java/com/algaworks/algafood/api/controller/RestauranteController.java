@@ -83,7 +83,7 @@ public class RestauranteController {
 		
 			if(restauranteAtual != null) {
 //		   		cozinhaAtual.setNome(cozinha.getNome());
-				BeanUtils.copyProperties(restaurante, restauranteAtual, "id", "formasPagamento", "endereco"); // copia os dados dos atributos de cozinha para cozinhaAtual
+				BeanUtils.copyProperties(restaurante, restauranteAtual, "id", "formasPagamento", "endereco", "dataCadastro"); // copia os dados dos atributos de cozinha para cozinhaAtual
 		
 //				Restaurante restauranteSalvo = cadastroRestaurante.salvar(restauranteAtual.get());
 				restauranteAtual = cadastroRestaurante.salvar(restauranteAtual);
