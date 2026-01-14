@@ -30,3 +30,10 @@ INSERT INTO permissao (nome, descricao) VALUES ('Permissao ABC','Descricao da pe
 INSERT INTO permissao (nome, descricao) VALUES ('Permissao ABC','Descricao da permissao ABC');
 
 INSERT INTO restaurante_forma_pagamento (restaurante_id, forma_pagamento_id) VALUES (1,1), (1,2), (1,3), (2,3), (3,2), (3,3);
+
+INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto A', 6.5, true, 1);
+INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto B', 7.5, true, 1);
+INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto C', 3.5, true, 1);
+INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto D', 6.5, true, 2);
+INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto E', 6.5, true, 3);
+INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto F', 6.5, true, 3);
