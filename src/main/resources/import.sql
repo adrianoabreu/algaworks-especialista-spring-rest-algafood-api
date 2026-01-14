@@ -21,6 +21,13 @@ INSERT INTO restaurante (nome, taxa_frete, cozinha_id, endereco_cidade_id, ender
 INSERT INTO restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao) VALUES ('Outback', 1.2, 2, utc_timestamp, utc_timestamp);
 INSERT INTO restaurante (nome, taxa_frete, cozinha_id, data_cadastro, data_atualizacao) VALUES ('O Camarão', 4.5, 1, utc_timestamp, utc_timestamp);
 
+INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto A', 6.5, true, 1);
+INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto B', 7.5, true, 1);
+INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto C', 3.5, true, 1);
+INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto D', 6.5, true, 2);
+INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto E', 6.5, true, 3);
+INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto F', 6.5, true, 3);
+
 INSERT INTO forma_pagamento (descricao) VALUES ('Debito em conta');
 INSERT INTO forma_pagamento (descricao) VALUES ('Cartao de credito');
 INSERT INTO forma_pagamento (descricao) VALUES ('Pix');
@@ -31,9 +38,3 @@ INSERT INTO permissao (nome, descricao) VALUES ('Permissao ABC','Descricao da pe
 
 INSERT INTO restaurante_forma_pagamento (restaurante_id, forma_pagamento_id) VALUES (1,1), (1,2), (1,3), (2,3), (3,2), (3,3);
 
-INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto A', 6.5, true, 1);
-INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto B', 7.5, true, 1);
-INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto C', 3.5, true, 1);
-INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto D', 6.5, true, 2);
-INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto E', 6.5, true, 3);
-INSERT INTO produto (nome,preco,ativo, restaurante_id) VALUES ('Produto F', 6.5, true, 3);
