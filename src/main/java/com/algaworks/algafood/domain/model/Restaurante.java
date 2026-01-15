@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+//import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -44,7 +44,7 @@ public class Restaurante {
 
 	@JsonIgnore
 //	@JsonIgnoreProperties("hibernateLazyInitializer")
-	@ManyToOne(fetch = FetchType.LAZY)  //toda associação ToOne por padrão possui o Eager Loading, que significa trazer determinado dado sem necessidade. @ManyToOne e @OneToOne
+	@ManyToOne //(fetch = FetchType.LAZY)  //toda associação ToOne por padrão possui o Eager Loading, que significa trazer determinado dado sem necessidade. @ManyToOne e @OneToOne
 	@JoinColumn(name = "cozinha_id", nullable = false)
 	private Cozinha cozinha;
 	
@@ -62,8 +62,8 @@ public class Restaurante {
 	@Column(nullable = false, columnDefinition = "datetime(6)")
 	private LocalDateTime dataAtualizacao;
 	
-	@JsonIgnore
-	@ManyToMany(fetch = FetchType.EAGER)  //toda associação ToMany por padrão possui o Lazy Loading, que significa carregamento por demanda. @ManyToMany e @OneToMany
+//	@JsonIgnore
+	@ManyToMany //(fetch = FetchType.EAGER)  //toda associação ToMany por padrão possui o Lazy Loading, que significa carregamento por demanda. @ManyToMany e @OneToMany
 	@JoinTable(name = "restaurante_forma_pagamento", 
 			joinColumns = @JoinColumn(name = "restaurante_id"), 
 			inverseJoinColumns = @JoinColumn(name = "forma_pagamento_id"))
