@@ -17,7 +17,7 @@ import com.algaworks.algafood.domain.model.Restaurante;
 public interface RestauranteRepository extends CustomJpaRepository<Restaurante, Long>
 						, RestauranteRepositoryQueries, JpaSpecificationExecutor<Restaurante> {
 	
-	@Query("select r from Restaurante r join fetch r.cozinha left join fetch r.formasPagamento")
+	@Query("select r from Restaurante r join fetch r.cozinha")
 	List<Restaurante> findAll();
 	
 	//Retorna uma faixa de taxa frete informado

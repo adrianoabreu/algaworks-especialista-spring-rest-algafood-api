@@ -62,7 +62,7 @@ public class Restaurante {
 	@Column(nullable = false, columnDefinition = "datetime(6)")
 	private LocalDateTime dataAtualizacao;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@ManyToMany //(fetch = FetchType.EAGER)  //toda associação ToMany por padrão possui o Lazy Loading, que significa carregamento por demanda. @ManyToMany e @OneToMany
 	@JoinTable(name = "restaurante_forma_pagamento", 
 			joinColumns = @JoinColumn(name = "restaurante_id"), 
