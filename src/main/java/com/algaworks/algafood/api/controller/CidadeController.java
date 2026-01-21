@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 //import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
+import com.algaworks.algafood.domain.exception.NegocioException;
 //import com.algaworks.algafood.domain.exception.EntidadeEmUsoException;
 //import com.algaworks.algafood.domain.exception.EntidadeNaoEncontradaException;
 import com.algaworks.algafood.domain.model.Cidade;
@@ -52,7 +55,12 @@ public class CidadeController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cidade adicionar(@RequestBody Cidade cidade) {
-		return cadastroCidade.salvar(cidade);
+		try {
+			return cadastroCidade.salvar(cidade);
+		} catch (EntidadeNaoEncontradaException e) {
+			throw new NegocioException(e.getMessage());
+		}
+
 	}
 	
 	@PutMapping("/{cidadeId}")
@@ -61,7 +69,12 @@ public class CidadeController {
 		
 		BeanUtils.copyProperties(cidade, cidadeAtual, "id"); // copia os dados dos atributos de cozinha para cozinhaAtual
 		
-	    return cadastroCidade.salvar(cidadeAtual);
+		try {
+		    return cadastroCidade.salvar(cidadeAtual);			
+		} catch (EntidadeNaoEncontradaException e) {
+			throw new NegocioException(e.getMessage());
+		}
+
 		
 	}
 
