@@ -74,7 +74,6 @@ public class CidadeController {
 		} catch (EntidadeNaoEncontradaException e) {
 			throw new NegocioException(e.getMessage());
 		}
-
 		
 	}
 
